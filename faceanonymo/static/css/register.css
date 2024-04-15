@@ -1,0 +1,6 @@
+/* register.css */
+.container {
+  margin: 0 auto; /* Center the container horizontally */
+  border: 1px solid #ccc; /* Add a border */
+  padding: 20px; /* Add padding for spacing */
+}
