@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </head>
 <body>
+    
     <div class="container w-25 mt-4 text-center" style='padding:30px'>
         {% comment %} <h1 class='p-4 fw-bolder fst-italic' style='font-family: cursive;'>Instagram</h1> {% endcomment %}
         <img src="{% static 'images/instagram_logo.png' %}" style='width: 75%; height: 70px;' alt="Instagram Logo">
@@ -23,11 +24,11 @@
         </div>
         <form method="post" action="{% url 'register_user' %}" class='mb-4 mt-4'>
             {% csrf_token %}
-            <input type="text" name="mobile_number" class="form-control mb-2" placeholder="Mobile Number">
-            <input type="email" name="email" class="form-control mb-2" placeholder="Email">
-            <input type="text" name="full_name" class="form-control mb-2" placeholder="Full name">
-            <input type="text" name="username" class="form-control mb-2" placeholder="Username">
-            <input type="password" name="password" class="form-control mb-2" placeholder="Password">
+            <input type="text" name="mobile_number" class="form-control mb-2" placeholder="Mobile Number" required>
+            <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+            <input type="text" name="full_name" class="form-control mb-2" placeholder="Full name" required>
+            <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
+            <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
             <p class="mt-3" style="font-size: 14px; line-height: 1.5; color: #4F504E;">People who use our service may have uploaded your contact information to Instagram. <span style="color: blue;">Learn More</span></p>
             <p style="font-size: 14px; line-height: 1.5; color: #4F504E;">By signing up, you agree to our <span style="color: blue;">Terms</span>, <span style="color: blue;">Privacy Policy</span>, and <span style="color: blue;">Cookies Policy</span>.</p>
         

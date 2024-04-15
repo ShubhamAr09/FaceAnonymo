@@ -55,9 +55,12 @@
 							<div class="action">
 								<div class="profile"
 									onclick="menuToggle()">
-									<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20220609093221/g2-200x200.jpg"
-										alt="user Avatar">
+									
+									<a href="{% url 'main-page' %}">
+										<img src="https://media.geeksforgeeks.org/wp-content/uploads/20220609093221/g2-200x200.jpg" alt="user Avatar">
+									</a>
+									
+										
 								</div>
 							</div>
 						</li>
@@ -420,7 +423,7 @@
 							<div class="profilepic">
 								<div class="profile_img">
 									<div class="image">
-										<img src="./assets/images/user-3.jpeg"
+										<img src="https://media.geeksforgeeks.org/wp-content/uploads/20220609093241/g3-200x200.png"
 											alt="img10">
 									</div>
 								</div>
@@ -688,5 +691,10 @@
 			</div>
 		</div>
 	</main>
+	<script>
+		function menuToggle() {
+			console.log("Menu toggled"); 
+		}
+	</script>
 </body>
 </html>

@@ -29,6 +29,8 @@ def register_user(request):
 def success_page(request):
     return render(request, 'register/success_page.html')
 
+
+
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -42,3 +44,6 @@ def login_page(request):
             # Return an error message or handle invalid credentials
             messages.error(request, 'Invalid username or password.')
     return render(request, 'login/login_user.html')
+
+def main_page(request):
+    return render(request, 'mainpage/main-page.html')
