@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Video Feed</title>
+</head>
+<body>
+    <h1>Anonymized Video Feed</h1>
+    <div id="video-container">
+        <video id="video-feed" autoplay></video>
+    </div>
+    <script>
+        const video = document.getElementById('video-feed');
+        const eventSource = new EventSource('{% url "video_feed" %}');  // Change to 'video_feed'
+    
+        eventSource.onmessage = function(event) {
+            video.src = 'data:image/jpeg;base64,' + event.data;
+        };
+    </script>
+</body>
+</html>

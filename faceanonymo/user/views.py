@@ -5,6 +5,96 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
+from django.shortcuts import render
+import cv2
+from django.http import StreamingHttpResponse
+
+def anonymize_faces():
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+    cap = cv2.VideoCapture(0)
+
+    # Get screen resolution
+    screen_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    screen_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+        for (x, y, w, h) in faces:
+            roi = frame[y:y + h, x:x + w]
+            blurred = cv2.GaussianBlur(roi, (75, 75), 0)
+            frame[y:y + h, x:x + w] = blurred
+
+        # Resize the frame to fit the whole screen
+        resized_frame = cv2.resize(frame, (1200, 850))
+
+        ret, buffer = cv2.imencode('.jpg', resized_frame)
+        frame = buffer.tobytes()
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+        for (x, y, w, h) in faces:
+            roi = frame[y:y + h, x:x + w]
+            blurred = cv2.GaussianBlur(roi, (75, 75), 0)
+            frame[y:y + h, x:x + w] = blurred
+
+        # Resize the frame to desired dimensions
+        resized_frame = cv2.resize(frame, (1000, 800))  # Adjust width and height as needed
+
+        ret, buffer = cv2.imencode('.jpg', resized_frame)
+        frame = buffer.tobytes()
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+        for (x, y, w, h) in faces:
+            roi = frame[y:y + h, x:x + w]
+            blurred = cv2.GaussianBlur(roi, (75, 75), 0)
+            frame[y:y + h, x:x + w] = blurred
+
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+def video_feed(request):
+    return StreamingHttpResponse(anonymize_faces(), content_type='multipart/x-mixed-replace; boundary=frame')
+
+
 def register_user(request):
     if request.method == 'POST':
         mobile_number = request.POST.get('mobile_number')
