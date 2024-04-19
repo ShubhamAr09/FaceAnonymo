@@ -24,7 +24,7 @@
         <form method="post" action="{% url 'register_user' %}" class='mb-4 mt-4'>
             {% csrf_token %}
             <input type="text" name="mobile_number" class="form-control mb-2" placeholder="Mobile Number">
-            <input type="email" name="email" class="form-control mb-2" placeholder="Email">
+            <input type="email" name="email_id" class="form-control mb-2" placeholder="Email">
             <input type="text" name="full_name" class="form-control mb-2" placeholder="Full name">
             <input type="text" name="username" class="form-control mb-2" placeholder="Username">
             <input type="password" name="password" class="form-control mb-2" placeholder="Password">

@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Instagram Clone</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-page.css' %}">
+    
+  </head>
+  <body>
+    
+    <main>
+      <header>
+        <div class="header-grid">
+          <div class="profile-pic">
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220609093221/g2-200x200.jpg" />
+          </div>
+          <div class="profile-info">
+            <div class="title row">
+              <h2>TeriMummyMeriHoja</h2>
+              <span class="verified-icon"></span>
+              <button class="primary">Follow</button>
+            </div>
+            <div class="desktop-only">
+              <div class="details row">
+                <ul>
+                  <li><span>722</span> posts</li>
+                  <li><span>25.1m</span> followers</li>
+                  <li><span>6</span> following</li>
+                </ul>
+              </div>
+              <div class="description row last">
+                <h1>apple</h1>
+                <span>
+                  Everyone has a story to tell.
+                  <br />
+                  Tag <a>#ShotoniPhone</a> to take part.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-info mobile-only">
+          <div class="description row">
+            <h1>apple</h1>
+            <span>
+              Everyone has a story to tell.
+              <br />
+              Tag <a>#ShotoniPhone</a> to take part.
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <ul class="stories">
+        <li class="story-item">
+         
+          <div class="image">
+            <img src="/static/images/addpost.png" />
+          </div>
+          <div class="title">New Post</div>
+          <!-- Input element for uploading images -->
+          <input type="file" id="uploadImageInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/static/images/ph3.jpg" />
+          </div>
+          <div class="title">🎈🧪</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/static/images/ph1.jpg" />
+          </div>
+          <div class="title">Diwali</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/static/images/ph4.jpg" />
+          </div>
+          <div class="title">Masked</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/static/images/ph2.jpg" />
+          </div>
+          <div class="title">Dark Universe</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/images/story-6.jpg" />
+          </div>
+          <div class="title">📱12 Pro 🎥 Test</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/images/story-7.jpg" />
+          </div>
+          <div class="title">Shot and Edited</div>
+        </li>
+        <li class="story-item">
+          <div class="image">
+            <img src="/images/story-8.jpg" />
+          </div>
+          <div class="title">Vertical Cinema</div>
+        </li>
+      
+        
+        <div class="slider-button-next">
+          <div class="arrow-right-icon"></div>
+        </div>
+      </ul>
+
+     
+
+
+      <div class="mobile-tabs mobile-only">
+        <ul>
+          <li>
+            <div>722</div>
+            posts
+          </li>
+          <li>
+            <div>25.1m</div>
+            followers
+          </li>
+          <li>
+            <div>6</div>
+            following
+          </li>
+        </ul>
+      </div>
+      <div class="desktop-only">
+        <div class="tabs">
+          <div class="tab-item active" id="posts-tab">
+            <span>Posts</span>
+          </div>
+          <div class="tab-item" id="upload-photos-tab">
+            <span>Upload Photos</span>
+          </div>
+          <div class="tab-item last" id="upload-videos-tab">
+            <span>Upload videos</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="posts-content" class="tab-content">
+        <p>This is the content for Posts tab.</p>
+      </div>
+
+    </div>
+
+
+      <div id="upload-photos-content" class="tab-content">
+        <form id="upload-form" method="post" enctype="multipart/form-data" action="{% url 'blur_all_image' %}">
+          {% csrf_token %}
+          <input type="file" name="image" accept="image/*" required>
+          <input type="text" name="comment" placeholder="Add a comment...">
+          <button type="submit">Upload</button>
+        </form>
+        <div id="upload-message" style="display: none;">Image uploaded successfully!</div>
+      </div>
+      
+
+      
+      <div id="upload-videos-content" class="tab-content">
+       content for upload video
+    </div>
+    
+
+    </main>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const postsTab = document.getElementById("posts-tab");
+        const uploadPhotosTab = document.getElementById("upload-photos-tab");
+        const uploadVideosTab = document.getElementById("upload-videos-tab");
+
+        const postsContent = document.getElementById("posts-content");
+        const uploadPhotosContent = document.getElementById("upload-photos-content");
+        const uploadVideosContent = document.getElementById("upload-videos-content");
+
+        postsTab.addEventListener("click", function () {
+          // Show Posts content and hide others
+          postsContent.style.display = "block";
+          uploadPhotosContent.style.display = "none";
+          uploadVideosContent.style.display = "none";
+        });
+
+        uploadPhotosTab.addEventListener("click", function () {
+          // Show Upload Photos content and hide others
+          postsContent.style.display = "none";
+          uploadPhotosContent.style.display = "block";
+          uploadVideosContent.style.display = "none";
+        });
+
+        uploadVideosTab.addEventListener("click", function () {
+          // Show Upload Videos content and hide others
+          postsContent.style.display = "none";
+          uploadPhotosContent.style.display = "none";
+          uploadVideosContent.style.display = "block";
+        });
+      });
+    </script>
+  </body>
+</html>
