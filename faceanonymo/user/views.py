@@ -315,9 +315,3 @@ def login_user(request):
     
     # Render the login page template
     return render(request, 'login/login_user.html')
-
-def display_uploaded_images(request):
-    # Retrieve all uploaded images with their associated captions
-    images = PostImage.objects.all()
-    return render(request, 'uploaded_images.html', {'images': images})
-
