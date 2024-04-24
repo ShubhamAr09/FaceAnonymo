@@ -24,9 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.register_user, name='register_user'),
     path('success/', views.success_page, name='success_page'),
+    path('success_video/', views.success_pagee, name='success_pagee'),
     path('login/', views.login_user, name='login'),
     path('success/video_feed/', views.video_feed, name='video_feed'),
     path('success/mainpage/', views.main_page, name='main-page'),
     path('success/mainpage/uploadImage/', views.upload_image, name='blur_all_image'),
     path('uploaded_images/', views.display_uploaded_images, name='display_uploaded_images'),
+    path('display_video/', views.display_video, name='display_video'),
+     path('upload_video/', views.upload_video, name='upload_video'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

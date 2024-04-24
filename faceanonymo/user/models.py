@@ -64,3 +64,23 @@ class PostImage(models.Model):
     @classmethod
     def create_post_image(cls, user, image_file, comment=''):
         return cls.objects.create_post_image(user=user, image_file=image_file, comment=comment)
+
+class Post_Video(models.Model):
+    user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
+    video_file = models.FileField(upload_to='post_videos/')
+    caption = models.TextField(blank=True)
+    likes = models.IntegerField(default=0)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.video_file.name
+
+    def get_absolute_url(self):
+        return reverse('video_detail', args=[str(self.id)])
+    
+    @classmethod
+    def create_post_video(cls, user, video_file, caption=''):
+        # Create a new Video instance with the provided data
+        video = cls(user=user, video_file=video_file, caption=caption)
+        video.save()
+        return video

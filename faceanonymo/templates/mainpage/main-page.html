@@ -147,10 +147,16 @@
       </div>
 
       <div id="posts-content" class="tab-content">
-        <p>This is the content for Posts tab.</p>
+        {% for image in images %}
+        <div>
+            <!-- Concatenate MEDIA_URL with the image path -->
+            <img src="/media/{{ image.image }}" alt="Uploaded Image" width="200" height="200">
+            <p>{{ image.comment }}</p>
+        </div>
+    {% endfor %}
       </div>
 
-    </div>
+  
 
 
       <div id="upload-photos-content" class="tab-content">
@@ -166,8 +172,15 @@
 
       
       <div id="upload-videos-content" class="tab-content">
-       content for upload video
-    </div>
+        <form id="upload-video-form" method="post" enctype="multipart/form-data" action="{% url 'upload_video' %}">
+          {% csrf_token %}
+          <input type="file" name="video" accept="video/*" required>
+          <input type="text" name="caption" placeholder="Add a caption...">
+          <button type="submit">Upload</button>
+        </form>
+        <div id="upload-video-message" style="display: none;">Video uploaded successfully!</div>
+      </div>
+      
     
 
     </main>

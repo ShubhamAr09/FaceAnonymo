@@ -1,18 +1,19 @@
+<!-- uploaded_images.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploaded Images</title>
 </head>
 <body>
     <h1>Uploaded Images</h1>
-
-    {% for image in images %}
-        <div>
-            <img src="{{ image.image_file.url }}" alt="Uploaded Image">
-            <p>{{ image.comment }}</p>
-        </div>
-    {% endfor %}
+    <div>
+        {% for image in images %}
+            <div>
+                <!-- Concatenate MEDIA_URL with the image path -->
+                <img src="/media/{{ image.image }}" alt="Uploaded Image" width="200" height="200">
+                <p>{{ image.comment }}</p>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
