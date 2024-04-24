@@ -55,6 +55,7 @@ def upload_video(request):
     else:
         return render(request, 'upload_video.html')
 
+
 def anonymize_faces_in_video(video_file):
     try:
         # Define the path to save the uploaded video temporarily
@@ -114,7 +115,7 @@ def anonymize_faces_in_video(video_file):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
-    
+
 
 def blur_faces_in_frame(frame):
     # Load the pre-trained Haar Cascade model for face detection
@@ -140,10 +141,8 @@ def blur_faces_in_frame(frame):
     return frame
 
 
-    
 def success_pagee(request):
     return render(request, 'success_vedio_page.html')
-
 
 @login_required
 def upload_image(request):
@@ -197,6 +196,7 @@ def upload_image(request):
     else:
         print("Invalid request method")
         return HttpResponse("Failed to upload image. Invalid request method.")
+
 
 def anonymize_faces():
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -286,7 +286,9 @@ def video_feed(request):
 
 @login_required
 def success_page(request):
-    return render(request, 'register/success_page.html')
+    post_videos = Post_Video.objects.all()
+    return render(request, 'register/success_page.html', {'post_videos': post_videos})
+
 
 
 
@@ -374,6 +376,6 @@ def display_uploaded_images(request):
 
 def display_video(request):
     post_video = Post_Video.objects.last() 
-    return render(request, 'display_video.html', {'post_video': post_video})
+    return render(request, 'register/success_page.html', {'post_video': post_video})
 
 
